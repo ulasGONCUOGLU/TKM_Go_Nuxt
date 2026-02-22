@@ -104,37 +104,24 @@ Minimal MVP mimarisi iskeleti. HTTP API üzerinden “plan” gönderip bir cont
 
   Terminalde sunucu çalışan pencerede **Ctrl+C** ile sunucuyu durdurabilirsin.
 
----
-
-## GitHub'a Yükleme
-
-1. **GitHub'da yeni repo oluştur:** [github.com/new](https://github.com/new)
-   - Repository adı: `TKM_Go_Nuxt` (veya istediğin isim)
-   - **"Add a README file"** işaretleme (zaten var)
-   - **"Add .gitignore"** işaretleme (zaten var)
-   - Create repository
-
-2. **Remote ekle ve push et:**
-   ```bash
-   git remote add origin https://github.com/ulasGONCUOGLU//TKM_Go_Nuxt.git
-   git branch -M main
-   git push -u origin main
-   ```
-
----
 
 ## Proje Yapısı
 
 ```
-central_control/
-├── cmd/server/          # Giriş noktası (main)
+central-control/
+│
+├── cmd/
+│   └── server/          → main.go burada
+│
 ├── internal/
-│   ├── api/             # HTTP handler’lar, route kayıt
-│   ├── controller/      # ControllerManager (plan uygulama, durum)
-│   ├── model/           # Plan, Phase, ControllerStatus
-│   └── adapter/
-│       ├── adapter.go   # ControllerAdapter arayüzü
-│       └── mock/        # Mock controller implementasyonu
+│   ├── api/             → HTTP handlerlar, route kayıt
+│   ├── controller/      → Controller Manager (plan uygulama, durum)
+│   ├── adapter/         → protocol adapter interface + impl
+│   │     ├── adapter.go → ControllerAdapter arayüzü
+│   │     └── mock/      → sanal controller adapter implementation
+│   ├── model/           → Plan, Phase, Status structları
+│   └── util/            → zamanlayıcı, logger vs (şimdilik gerekmez)
+│
 ├── go.mod
 └── README.md
 ```
